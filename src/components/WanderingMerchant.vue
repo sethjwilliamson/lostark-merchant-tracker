@@ -1,5 +1,5 @@
 <template>
-    <tr class="wandering-merchant">
+    <tr class="wandering-merchant" :class="merchant.disabled ? 'disabled' : null">
         <td class="wandering-merchant-column wandering-merchant-name">
             {{ merchant.name }}
         </td>

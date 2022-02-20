@@ -19,7 +19,7 @@
                 Time
             </th>
             </thead>
-            <wandering-merchant v-for="merchant in merchants" :key="merchant.name" :merchant="merchant"/>
+            <wandering-merchant v-for="merchant in merchantsComputed" :key="merchant.name" :merchant="merchant"/>
         </table>
         </div>
     </div>
@@ -294,20 +294,40 @@ export default Vue.extend({
     },
     computed: {
         merchantsComputed: function () : Merchant[] {
+            console.log(this.searchInput)
+
             return this.merchants.map((x: Merchant) => {
                 return {
                     name: x.name,
                     location: x.location,
                     startTimes: x.startTimes,
                     items: x.items,
-                    disabled: false
+                    disabled: this.isDisabled(x)
                 }
             })
         }
     },
     methods: {
         isDisabled: function (merchant: Merchant) {
-            return false
+            if (this.searchInput.length === 0) {
+                return false
+            }
+
+            if (merchant.name.toLowerCase().includes(this.searchInput.toLowerCase())) {
+                return false
+            }
+
+            if (merchant.location.toLowerCase().includes(this.searchInput.toLowerCase())) {
+                return false
+            }
+
+            for (const itemName of merchant.items) {
+                if (itemName.toLowerCase().includes(this.searchInput.toLowerCase())) {
+                    return false
+                }
+            }
+
+            return true
         }
     }
 })
@@ -378,7 +398,7 @@ tr:nth-child(even) td {
 }
 
 .disabled > td {
-  opacity: 0.5;
+  opacity: 0.25;
 }
 
 .input-container {
