@@ -21,12 +21,20 @@ import tippy from 'tippy.js'
 import 'tippy.js/dist/tippy.css'
 import MerchantAvailability from './MerchantAvailability.vue'
 
+interface Merchant {
+    name: string,
+    location: string,
+    startTimes: Array<number>,
+    items: Array<string>,
+    disabled: boolean
+}
+
 export default Vue.extend({
     components: {
         MerchantAvailability
     },
     props: {
-        merchant: Object
+        merchant: Object as () => Merchant
     },
     data: function () {
         return {
@@ -34,8 +42,13 @@ export default Vue.extend({
     },
     mounted: function () {
         tippy(this.$refs['list-items-tippy'] as HTMLElement, {
-            content: this.merchant.items
+            content: this.tippyItemContent
         })
+    },
+    computed: {
+        tippyItemContent: function () : string {
+            return this.merchant.items.join('\n')
+        }
     }
 })
 </script>

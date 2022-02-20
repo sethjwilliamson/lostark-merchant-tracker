@@ -415,4 +415,9 @@ input.search {
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
 }
+
+.tippy-content {
+    white-space: pre-line;
+    text-align: center;
+}
 </style>
