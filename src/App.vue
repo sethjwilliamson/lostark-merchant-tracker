@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <wandering-merchant />
+    <wandering-merchant v-for="merchant in merchants" :key="merchant.name" :merchant="merchant"/>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default Vue.extend({
           name: 'Lucas',
           location: 'Yudia',
           startTimes: [
-            '1:30', '4:30', '5:30', '7:30', '8:30', '11:30'
+            1, 4, 5, 7, 8, 11, 13, 16, 17, 19, 20, 23
           ],
           items: [
             'Yudia Spellbook',
@@ -37,7 +37,7 @@ export default Vue.extend({
           name: 'Morris',
           location: 'East Luterra',
           startTimes: [
-            '1:30', '4:30', '5:30', '7:30', '8:30', '11:30'
+            1, 4, 5, 7, 8, 11, 13, 16, 17, 19, 20, 23
           ],
           items: [
             'Azenaporium Brooch',
@@ -55,7 +55,7 @@ export default Vue.extend({
           name: 'Mac',
           location: 'Anikka',
           startTimes: [
-            '1:30', '4:30', '5:30', '7:30', '8:30', '11:30'
+            1, 4, 5, 7, 8, 11, 13, 16, 17, 19, 20, 23
           ],
           items: [
             'Tournament Entrance Stamp',
@@ -70,7 +70,7 @@ export default Vue.extend({
           name: 'Jeffrey',
           location: 'Shushire',
           startTimes: [
-            '1:30', '4:30', '5:30', '7:30', '8:30', '11:30'
+            1, 4, 5, 7, 8, 11, 13, 16, 17, 19, 20, 23
           ],
           items: [
             'Shimmering Essence',
@@ -85,7 +85,7 @@ export default Vue.extend({
           name: 'Dorella',
           location: 'Feiton',
           startTimes: [
-            '1:30', '4:30', '5:30', '7:30', '8:30', '11:30'
+            1, 4, 5, 7, 8, 11, 13, 16, 17, 19, 20, 23
           ],
           items: [
             'Dessicated Wooden Statue',
@@ -102,7 +102,7 @@ export default Vue.extend({
           name: 'Malone',
           location: 'West Luterra',
           startTimes: [
-            '2:30', '5:30', '6:30', '8:30', '9:30', '12:30'
+            0, 2, 5, 6, 8, 9, 12, 14, 17, 18, 20, 21
           ],
           items: [
             'Black Rose',
@@ -119,7 +119,7 @@ export default Vue.extend({
           name: 'Burt',
           location: 'East Luterra',
           startTimes: [
-            '2:30', '5:30', '6:30', '8:30', '9:30', '12:30'
+            0, 2, 5, 6, 8, 9, 12, 14, 17, 18, 20, 21
           ],
           items: [
             'Azenaporium Brooch',
@@ -136,7 +136,7 @@ export default Vue.extend({
           name: 'Oliver',
           location: 'Tortoyk',
           startTimes: [
-            '2:30', '5:30', '6:30', '8:30', '9:30', '12:30'
+            0, 2, 5, 6, 8, 9, 12, 14, 17, 18, 20, 21
           ],
           items: [
             'Mokoko Carrot',
@@ -152,7 +152,7 @@ export default Vue.extend({
           name: 'Nox',
           location: 'Arthetine',
           startTimes: [
-            '2:30', '5:30', '6:30', '8:30', '9:30', '12:30'
+            0, 2, 5, 6, 8, 9, 12, 14, 17, 18, 20, 21
           ],
           items: [
             'Fine Gramophone',
@@ -167,7 +167,7 @@ export default Vue.extend({
           name: 'Aricer',
           location: 'Rohendel',
           startTimes: [
-            '2:30', '5:30', '6:30', '8:30', '9:30', '12:30'
+            0, 2, 5, 6, 8, 9, 12, 14, 17, 18, 20, 21
           ],
           items: [
             'Danube\'s Earrings',
@@ -184,7 +184,7 @@ export default Vue.extend({
           name: 'Rayni',
           location: 'Punika',
           startTimes: [
-            '2:30', '5:30', '6:30', '8:30', '9:30', '12:30'
+            0, 2, 5, 6, 8, 9, 12, 14, 17, 18, 20, 21
           ],
           items: [
             'Piñata Crafting Set',
@@ -202,7 +202,7 @@ export default Vue.extend({
           name: 'Ben',
           location: 'Rethramis',
           startTimes: [
-            '3:30', '4:30', '6:30', '7:30', '10:30', '12:30'
+            0, 3, 4, 6, 7, 10, 12, 15, 16, 18, 19, 22
           ],
           items: [
             'Fancier Bouquet',
@@ -218,7 +218,7 @@ export default Vue.extend({
           name: 'Peter',
           location: 'North Vern',
           startTimes: [
-            '3:30', '4:30', '6:30', '7:30', '10:30', '12:30'
+            0, 3, 4, 6, 7, 10, 12, 15, 16, 18, 19, 22
           ],
           items: [
             'Exquisite Music Box',
@@ -236,7 +236,7 @@ export default Vue.extend({
           name: 'Laitir',
           location: 'Yorn',
           startTimes: [
-            '3:30', '4:30', '6:30', '7:30', '10:30', '12:30'
+            0, 3, 4, 6, 7, 10, 12, 15, 16, 18, 19, 22
           ],
           items: [
             'Piyer\'s Secret Textbook',
