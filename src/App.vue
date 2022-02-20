@@ -1,26 +1,29 @@
 <template>
     <div id="app">
         <div class="input-container">
-        <input v-model="searchInput" type="text" class="search" placeholder="Search by name, location, item.." >
+            <input v-model="searchInput" type="text" class="search" placeholder="Search by name, location, item.." >
         </div>
         <div class="table-container">
-        <table>
-            <thead>
-            <th>
-                Merchant Name
-            </th>
-            <th>
-                Location
-            </th>
-            <th>
-                Items
-            </th>
-            <th>
-                Time
-            </th>
-            </thead>
-            <wandering-merchant v-for="merchant in merchantsComputed" :key="merchant.name" :merchant="merchant"/>
-        </table>
+            <table>
+                <thead>
+                <th>
+                    Merchant Name
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Items
+                </th>
+                <th>
+                    Time
+                </th>
+                </thead>
+                <wandering-merchant v-for="merchant in merchantsComputed" :key="merchant.name" :merchant="merchant"/>
+            </table>
+        </div>
+        <div class="donation-prompt">
+            Saved some shards / time? <a href="https://www.buymeacoffee.com/sethjwilliamson"> Consider donating</a>!
         </div>
     </div>
 </template>
@@ -419,5 +422,9 @@ input.search {
 .tippy-content {
     white-space: pre-line;
     text-align: center;
+}
+
+.donation-prompt {
+    margin-top: 30px;
 }
 </style>
