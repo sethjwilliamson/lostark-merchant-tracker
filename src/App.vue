@@ -1,6 +1,24 @@
 <template>
   <div id="app">
-    <wandering-merchant v-for="merchant in merchants" :key="merchant.name" :merchant="merchant"/>
+    <div class="table-container">
+      <table>
+        <thead>
+          <th>
+            Merchant Name
+          </th>
+          <th>
+            Location
+          </th>
+          <th>
+            Items
+          </th>
+          <th>
+            Time
+          </th>
+        </thead>
+        <wandering-merchant v-for="merchant in merchants" :key="merchant.name" :merchant="merchant"/>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -266,5 +284,59 @@ export default Vue.extend({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.table-container {
+  margin: auto;
+  max-width: 1000px;
+}
+
+table {
+  display: grid;
+  border-collapse: collapse;
+  min-width: 100%;
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr)
+    minmax(150px, 1fr);
+}
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+th,
+td {
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #6c7ae0;
+  text-align: center;
+  font-weight: normal;
+  font-size: 1.1rem;
+  color: white;
+}
+
+th:last-child {
+  border: 0;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #808080;
+}
+
+tr:nth-child(even) td {
+  background: #f8f6ff;
 }
 </style>
