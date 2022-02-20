@@ -7,8 +7,9 @@
             </span>
         </template>
         <template v-else>
-
-            Not Active
+            <span>
+                Starts {{ now.clone().set('hour', nextHourAvailable).set('minutes', 30).fromNow() }}
+            </span>
         </template>
     </div>
 </template>
@@ -48,7 +49,7 @@ export default Vue.extend({
     },
     computed: {
         isActive: function () {
-            if (this.now.minute < 0 || this.now.minute >= 55) {
+            if (this.now.minute() < 30 || this.now.minute() >= 55) {
                 return false
             }
 
@@ -59,9 +60,20 @@ export default Vue.extend({
             return false
         },
         nextHourAvailable: function () {
-            return 0
-        }
+            let minAllowedHour = 24
 
+            for (const hour of this.times) {
+                if (this.now.hour() === hour) {
+                    return hour
+                }
+
+                if (hour < minAllowedHour && hour >= this.now.hour()) {
+                    minAllowedHour = hour
+                }
+            }
+
+            return minAllowedHour
+        }
     }
 })
 </script>
