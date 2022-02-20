@@ -17,7 +17,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import ActiveIndicator from './ActiveIndicator.vue'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -26,29 +26,34 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(relativeTime)
 
+declare interface BaseComponentData {
+  now: Dayjs,
+  interval: number
+}
+
 export default Vue.extend({
     components: {
         ActiveIndicator
     },
     props: {
-        times: Array
+        times: Array as () => number[]
     },
-    data: function () {
+    data: function () : BaseComponentData {
         return {
-            now: dayjs(),
+            now: dayjs() as Dayjs,
             interval: 0
         }
     },
     created: function () {
         this.interval = setInterval(() => {
-            this.now = dayjs().tz('America/New_York')
-        }, 1000)
+            this.now = dayjs().tz('America/New_York') as Dayjs
+        }, 1000) as number
     },
     beforeDestroy: function () {
         clearInterval(this.interval)
     },
     computed: {
-        isActive: function () {
+        isActive: function () : boolean {
             if (this.now.minute() < 30 || this.now.minute() >= 55) {
                 return false
             }
@@ -59,15 +64,15 @@ export default Vue.extend({
 
             return false
         },
-        nextHourAvailable: function () {
+        nextHourAvailable: function () : number {
             let minAllowedHour = 24
 
             for (const hour of this.times) {
-                if (this.now.hour() === hour) {
+                if (this.now.hour() === hour && this.now.minute() < 30) {
                     return hour
                 }
 
-                if (hour < minAllowedHour && hour >= this.now.hour()) {
+                if (hour < minAllowedHour && hour > this.now.hour()) {
                     minAllowedHour = hour
                 }
             }

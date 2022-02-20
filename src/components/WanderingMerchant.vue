@@ -6,8 +6,8 @@
         <td class="wandering-merchant-column wandering-merchant-location">
             {{ merchant.location }}
         </td>
-        <td class="wandering-merchant-column wandering-merchant-location">
-            {{ "merchant.items" }}
+        <td class="wandering-merchant-column wandering-merchant-location" ref="list-items-tippy">
+            List Items
         </td>
         <td class="wandering-merchant-column">
             <merchant-availability :times="merchant.startTimes" />
@@ -17,6 +17,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import tippy from 'tippy.js'
+import 'tippy.js/dist/tippy.css'
 import MerchantAvailability from './MerchantAvailability.vue'
 
 export default Vue.extend({
@@ -25,6 +27,15 @@ export default Vue.extend({
     },
     props: {
         merchant: Object
+    },
+    data: function () {
+        return {
+        }
+    },
+    mounted: function () {
+        tippy(this.$refs['list-items-tippy'] as HTMLElement, {
+            content: this.merchant.items
+        })
     }
 })
 </script>
