@@ -2,6 +2,10 @@
     <div id="app">
         <div class="input-container">
             <input v-model="searchInput" type="text" class="search" placeholder="Search by name, location, item.." >
+            <div class="use-regex-container" ref="use-regex-container">
+                <input v-model="isUsingRegex" type="checkbox" id="isUsingRegex" >
+                <label for="isUsingRegex"> Use Regex</label>
+            </div>
         </div>
         <div class="table-container">
             <table>
@@ -31,6 +35,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import WanderingMerchant from './components/WanderingMerchant.vue'
+import tippy from 'tippy.js'
+import 'tippy.js/dist/tippy.css'
 
 interface Merchant {
     name: string,
@@ -292,13 +298,17 @@ export default Vue.extend({
                     disabled: false
                 }
             ] as Merchant[],
-            searchInput: ''
+            searchInput: '',
+            isUsingRegex: false
         }
+    },
+    mounted: function () {
+        tippy(this.$refs['use-regex-container'] as HTMLElement, {
+            content: "Use Regex to search multiple regions or multiple items. \n\nGoogle \"Simple Regex Cheat Sheet\" if you don't know what this means."
+        })
     },
     computed: {
         merchantsComputed: function () : Merchant[] {
-            console.log(this.searchInput)
-
             return this.merchants.map((x: Merchant) => {
                 return {
                     name: x.name,
@@ -316,6 +326,10 @@ export default Vue.extend({
                 return false
             }
 
+            if (this.isUsingRegex) {
+                return this.isDisabledRegex(merchant)
+            }
+
             if (merchant.name.toLowerCase().includes(this.searchInput.toLowerCase())) {
                 return false
             }
@@ -326,6 +340,32 @@ export default Vue.extend({
 
             for (const itemName of merchant.items) {
                 if (itemName.toLowerCase().includes(this.searchInput.toLowerCase())) {
+                    return false
+                }
+            }
+
+            return true
+        },
+        isDisabledRegex: function (merchant: Merchant) {
+            let regex : RegExp
+
+            try {
+                regex = new RegExp(this.searchInput)
+            } catch {
+                console.log('Regex Error: Filter disabled')
+                return false
+            }
+
+            if (regex.test(merchant.name)) {
+                return false
+            }
+
+            if (regex.test(merchant.location)) {
+                return false
+            }
+
+            for (const itemName of merchant.items) {
+                if (regex.test(itemName)) {
                     return false
                 }
             }
@@ -405,9 +445,18 @@ tr:nth-child(even) td {
 }
 
 .input-container {
-  max-width: 300px;
+  max-width: 400px;
   margin: auto;
   margin-bottom: 20px;
+  display: flex;
+  grid-gap: 30px;
+  align-items: center;
+}
+
+.use-regex-container {
+    display: flex;
+    grid-gap: 10px;
+    align-items: center;
 }
 
 input.search {
