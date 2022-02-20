@@ -77,3 +77,12 @@ export default Vue.extend({
     }
 })
 </script>
+
+<style scoped>
+.merchant-availability {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    justify-content: center;
+}
+</style>

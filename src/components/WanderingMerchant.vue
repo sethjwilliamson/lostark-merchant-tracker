@@ -1,18 +1,18 @@
 <template>
-    <div class="wandering-merchant">
-        <div class="wandering-merchant-column wandering-merchant-name">
+    <tr class="wandering-merchant">
+        <td class="wandering-merchant-column wandering-merchant-name">
             {{ merchant.name }}
-        </div>
-        <div class="wandering-merchant-column wandering-merchant-location">
+        </td>
+        <td class="wandering-merchant-column wandering-merchant-location">
             {{ merchant.location }}
-        </div>
-        <div class="wandering-merchant-column wandering-merchant-location">
+        </td>
+        <td class="wandering-merchant-column wandering-merchant-location">
             {{ "merchant.items" }}
-        </div>
-        <div class="wandering-merchant-column">
+        </td>
+        <td class="wandering-merchant-column">
             <merchant-availability :times="merchant.startTimes" />
-        </div>
-    </div>
+        </td>
+    </tr>
 </template>
 
 <script lang="ts">
@@ -31,7 +31,6 @@ export default Vue.extend({
 
 <style scoped>
 .wandering-merchant {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+
 }
 </style>
